@@ -18,19 +18,19 @@ const char* MQTT_USER     = "mqtt";
 const char* MQTT_PASSWORD = "Gabibi89*";
 
 // Tópicos de dados
-const char* TOPIC_TEMP    = "casa/sala/temperatura";
-const char* TOPIC_HUMID   = "casa/sala/umidade";
-const char* TOPIC_STATUS  = "casa/sala/status"; 
-const char* CLIENT_ID     = "esp32s3-sala";
+const char* TOPIC_TEMP    = "casa/Sala/temperatura";
+const char* TOPIC_HUMID   = "casa/Sala/umidade";
+const char* TOPIC_STATUS  = "casa/Sala/status"; 
+const char* CLIENT_ID     = "esp32s3-Sala";
 
 const int   DHT_PIN       = 4; // Pino de dados conectado no GPIO4 do ESP32-S3
 const long  INTERVAL_MS   = 10000;   // intervalo de publicação
 const long  RECONECT_MS   = 5000;    // intervalo entre tentativas de reconexão
  
 // Tópicos de Discovery para o Home Assistant
-const char* DISCOVERY_TEMP   = "homeassistant/sensor/esp32s3_sala/temperatura/config";
-const char* DISCOVERY_HUMID  = "homeassistant/sensor/esp32s3_sala/umidade/config";
-const char* DISCOVERY_STATUS = "homeassistant/binary_sensor/esp32s3_sala/status/config";
+const char* DISCOVERY_TEMP   = "homeassistant/sensor/esp32s3_Sala/temperatura/config";
+const char* DISCOVERY_HUMID  = "homeassistant/sensor/esp32s3_Sala/umidade/config";
+const char* DISCOVERY_STATUS = "homeassistant/binary_sensor/esp32s3_Sala/status/config";
 // ------------------------------------------
 
 DHTesp       dht;
@@ -92,11 +92,11 @@ void publicarDiscovery() {
   // --- Temperatura ---
   String payloadTemp = R"({
     "name": "Temperatura Sala",
-    "state_topic": "casa/sala/temperatura",
+    "state_topic": "casa/Sala/temperatura",
     "unit_of_measurement": "°C",
     "device_class": "temperature",
-    "unique_id": "esp32s3_sala_temp",
-    "suggested_area": "Sala"
+    "unique_id": "esp32s3_Sala_temp",
+    "suggested_area": "Sala de estar"
   })"; 
 
   mqtt.publish(DISCOVERY_TEMP, payloadTemp.c_str(), true);
@@ -104,10 +104,10 @@ void publicarDiscovery() {
   // --- Umidade ---
   String payloadHumid = R"({
     "name": "Umidade Sala",
-    "state_topic": "casa/sala/umidade",
+    "state_topic": "casa/Sala/umidade",
     "unit_of_measurement": "%",
     "device_class": "humidity",
-    "unique_id": "esp32s3_sala_humid",
+    "unique_id": "esp32s3_Sala_humid",
     "suggested_area": "Sala"
   })"; 
 
@@ -116,11 +116,11 @@ void publicarDiscovery() {
   // --- Status de Conectividade (Binary Sensor) ---
   String payloadStatus = R"({
     "name": "ESP32-S3 Conexão",
-    "state_topic": "casa/sala/status",
+    "state_topic": "casa/Sala/status",
     "payload_on": "online",
     "payload_off": "offline",
     "device_class": "connectivity",
-    "unique_id": "esp32s3_sala_status",
+    "unique_id": "esp32s3_Sala_status",
     "suggested_area": "Sala"
   })"; 
 
